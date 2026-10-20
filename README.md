@@ -59,9 +59,35 @@ pnpm version-packages   # bump versions and write changelogs
 pnpm release            # build and publish to npm
 ```
 
-The GitHub release workflow opens a version PR on `main`; merging it publishes
-the packages. Publishing requires an `NPM_TOKEN` repository secret and npm
-provenance is enabled in CI.
+The Release workflow on `main` opens a version PR; merging it publishes the
+unpublished packages.
+
+### First publish
+
+The first version must be published interactively so npm can create the package
+and complete 2FA:
+
+```bash
+pnpm --filter docusaurus-theme-pele publish --access public
+```
+
+npm may stage the upload (visible as a temporary `0.0.0-stage` version) and ask
+for browser approval. Approving promotes the real version to `latest`.
+
+### Trusted publishing (CI)
+
+After the first publish, configure trusted publishing on npmjs.com:
+
+1. Open the package → **Settings** → **Trusted publishing**.
+2. Add a **GitHub Actions** publisher:
+   - Repository: `kywk/docusaurus-kit`
+   - Workflow: `release.yml`
+   - Environment: none
+3. Save.
+
+The Release workflow then publishes through GitHub OIDC with provenance and
+does not need a long-lived `NPM_TOKEN`. If an `NPM_TOKEN` secret exists it takes
+precedence, which is only useful for registries without OIDC support.
 
 ## Design rules
 

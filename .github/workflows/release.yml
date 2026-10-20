@@ -3,6 +3,7 @@ name: Release
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: release
@@ -31,8 +32,14 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - run: pnpm check
+      - run: pnpm typecheck
+      - run: pnpm test
       - run: pnpm build
 
+      # Publishing uses npm trusted publishing (OIDC) by default. If an
+      # NPM_TOKEN secret exists it takes precedence, which is only useful for
+      # registries that do not support OIDC.
       - uses: changesets/action@v1
         with:
           version: pnpm version-packages
