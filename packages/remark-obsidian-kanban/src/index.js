@@ -1,5 +1,25 @@
 const { visit } = require('unist-util-visit');
 
+// FNV-1a 32-bit hash: the same tag name always maps to the same hue.
+function tagHue(name) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < name.length; i++) {
+    h ^= name.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return (h >>> 0) % 360;
+}
+
+const TAG_RE =
+  /(^|\s)#([^\s#.,;:!?'"()[\]{}<>]*[^\s\d#.,;:!?'"()[\]{}<>][^\s#.,;:!?'"()[\]{}<>]*)/gu;
+
+function renderTags(text) {
+  return text.replace(TAG_RE, (_, pre, name) => {
+    const tag = name.toLowerCase();
+    return `${pre}<span class="kanban-tag" style="--kanban-tag-hue: ${tagHue(tag)}">#${name}</span>`;
+  });
+}
+
 function remarkKanban(options = {}) {
   return (tree) => {
     const { pageResolver, hrefTemplate } = options;
@@ -84,9 +104,9 @@ function remarkKanban(options = {}) {
                     const marker = !card.task && node.value.match(/^\[([ xX\-/])\]\s+/);
                     if (marker) {
                       card.task = marker[1];
-                      titleHtml += node.value.slice(marker[0].length);
+                      titleHtml += renderTags(node.value.slice(marker[0].length));
                     } else {
-                      titleHtml += node.value;
+                      titleHtml += renderTags(node.value);
                     }
                   } else if (node.type === 'wikiLink') {
                     titleHtml += renderWikiLink(node);
@@ -173,7 +193,7 @@ function remarkKanban(options = {}) {
                 let contentHtml = '';
                 visit(contentNode, (node) => {
                   if (node.type === 'text') {
-                    contentHtml += node.value;
+                    contentHtml += renderTags(node.value);
                   } else if (node.type === 'strong') {
                     contentHtml += '<strong>';
                     if (node.children) {
@@ -227,6 +247,8 @@ function remarkKanban(options = {}) {
 .kanban-board-container { background: var(--ifm-background-color); padding: 1rem; border-radius: 8px; }
 .kanban-board-container img { max-width: 100%; height: auto; border-radius: 4px; }
 .kanban-card-title { color: var(--ifm-color-primary-dark); }
+.kanban-tag { display: inline-block; margin: 0 0.1em; padding: 0 0.6em; border-radius: 999px; font-size: 0.85em; font-weight: 500; line-height: 1.6; color: hsl(var(--kanban-tag-hue) 65% 32%); background: hsl(var(--kanban-tag-hue) 70% 50% / 0.15); border: 1px solid hsl(var(--kanban-tag-hue) 70% 50% / 0.35); }
+[data-theme='dark'] .kanban-tag { color: hsl(var(--kanban-tag-hue) 75% 72%); }
 .kanban-card--cancelled .kanban-card-title { color: var(--ifm-color-emphasis-500); text-decoration: line-through; }
 .kanban-card--in-progress .kanban-card-title { color: var(--ifm-color-primary); }
 </style><div class="kanban-board-container">${html}</div>`,
