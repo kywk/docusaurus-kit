@@ -100,4 +100,16 @@ kanban-plugin: board
     expect(html).toContain('First task');
     expect(html).not.toContain('kanban:settings');
   });
+
+  it('gives identical tags the same colour', () => {
+    const html = boardHtml(
+      run(`---\nkanban-plugin: board\n---\n\n## A\n\n- 抵達 #交通\n- 轉乘 #交通 #藝術 #123\n`),
+    );
+    const hues = [...html.matchAll(/--kanban-tag-hue: (\d+)">#([^<]+)</g)];
+    const byTag = Object.fromEntries(hues.map((m) => [m[2], m[1]]));
+    expect(hues.filter((m) => m[2] === '交通')).toHaveLength(2);
+    expect(new Set(hues.filter((m) => m[2] === '交通').map((m) => m[1])).size).toBe(1);
+    expect(byTag['藝術']).toBeDefined();
+    expect(byTag['123']).toBeUndefined();
+  });
 });
