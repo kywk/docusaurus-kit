@@ -37,9 +37,9 @@ jobs:
       - run: pnpm test
       - run: pnpm build
 
-      # Publishing uses npm trusted publishing (OIDC) by default. If an
-      # NPM_TOKEN secret exists it takes precedence, which is only useful for
-      # registries that do not support OIDC.
+      # Publishing uses npm trusted publishing (OIDC). Each package has a
+      # GitHub publisher configured on npmjs.com, so no long-lived NPM_TOKEN
+      # is needed and maintainers are not asked for 2FA on every release.
       - uses: changesets/action@v1
         with:
           version: pnpm version-packages
@@ -48,5 +48,4 @@ jobs:
           title: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: "true"

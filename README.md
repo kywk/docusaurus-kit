@@ -11,8 +11,8 @@ never share a release cadence or a history.
 | Package | Status | Description |
 | --- | --- | --- |
 | [`docusaurus-theme-pele`](packages/theme-pele) | `0.1.1` | Render Mermaid fences with [Pele](https://pele.run) instead of Mermaid |
-| [`remark-obsidian-kanban`](packages/remark-obsidian-kanban) | `0.2.0` | Render Obsidian kanban boards in Docusaurus |
-| [`rehype-obsidian-tasks`](packages/rehype-obsidian-tasks) | `0.2.0` | Render Obsidian `[-]` / `[/]` task statuses |
+| [`remark-obsidian-kanban`](packages/remark-obsidian-kanban) | `0.2.1` | Render Obsidian kanban boards in Docusaurus |
+| [`rehype-obsidian-tasks`](packages/rehype-obsidian-tasks) | `0.2.1` | Render Obsidian `[-]` / `[/]` task statuses |
 
 Only packages that work outside kywk.me belong here. Site-specific policies
 (URL slugs, story maps, album import pipelines) stay in the site repository
@@ -85,9 +85,21 @@ After the first publish, configure trusted publishing on npmjs.com:
    - Environment: none
 3. Save.
 
-The Release workflow then publishes through GitHub OIDC with provenance and
-does not need a long-lived `NPM_TOKEN`. If an `NPM_TOKEN` secret exists it takes
-precedence, which is only useful for registries without OIDC support.
+The Release workflow then publishes through GitHub OIDC with provenance. It
+does not use an `NPM_TOKEN` secret and does not prompt maintainers for 2FA.
+
+For a new package, complete its first interactive publish, then register the
+trusted publisher once:
+
+```bash
+npx npm@12 trust github <package> \
+  --repo kywk/docusaurus-kit \
+  --file release.yml \
+  --allow-publish --allow-stage-publish
+```
+
+After that, releases go through the version PR workflow only. Do not run
+`pnpm publish` locally for routine releases.
 
 ## Design rules
 
