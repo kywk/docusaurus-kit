@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "packageManager": "pnpm@12.4.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kywk/docusaurus-plugins.git"
+  },
   "engines": {
     "node": ">=20.19.0"
   },

@@ -4,6 +4,15 @@
   "description": "Render Mermaid diagrams in Docusaurus with Pele: synchronous, CSS-variable themed SVG.",
   "license": "MIT",
   "author": "kywk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kywk/docusaurus-plugins.git",
+    "directory": "packages/theme-pele"
+  },
+  "bugs": {
+    "url": "https://github.com/kywk/docusaurus-plugins/issues"
+  },
+  "homepage": "https://github.com/kywk/docusaurus-plugins/tree/main/packages/theme-pele#readme",
   "keywords": [
     "docusaurus",
     "docusaurus-theme",
