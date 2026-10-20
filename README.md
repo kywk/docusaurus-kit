@@ -1,4 +1,4 @@
-# docusaurus-plugins
+# docusaurus-kit
 
 A pnpm monorepo for reusable Docusaurus packages maintained by kywk.
 

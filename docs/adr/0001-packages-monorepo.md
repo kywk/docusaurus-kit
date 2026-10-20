@@ -16,7 +16,7 @@ users, starting with a Pele-based Mermaid renderer.
 ## Decision
 
 Publish reusable packages from a standalone pnpm monorepo
-(`docusaurus-plugins`). Keep the site repository as a consumer that installs
+(`docusaurus-kit`). Keep the site repository as a consumer that installs
 published versions.
 
 ## Rationale
