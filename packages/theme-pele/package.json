@@ -1,6 +1,6 @@
 {
   "name": "docusaurus-theme-pele",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Render Mermaid diagrams in Docusaurus with Pele: synchronous, CSS-variable themed SVG.",
   "license": "MIT",
   "author": "kywk",
