@@ -1,5 +1,12 @@
 # docusaurus-theme-pele
 
+## 0.1.1
+
+### Patch Changes
+
+- 48830a8: Document the Docusaurus, React, Node.js, and Pele versions the package is
+  tested against.
+
 ## 0.1.0
 
 ### Minor Changes
