@@ -7,6 +7,8 @@ The plugin detects boards through `kanban-plugin: board` frontmatter, treats
 `##` headings as columns, and turns list items into cards. Kanban settings
 blocks are removed from the output.
 
+Tested with Docusaurus 3.10, React 19, and Node.js 22.
+
 ## Install
 
 ```bash

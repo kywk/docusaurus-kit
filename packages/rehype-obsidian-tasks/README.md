@@ -11,6 +11,8 @@ Obsidian extends GFM checkboxes with custom statuses. This plugin understands:
 | `- [ ]` | Open (GFM) |
 | `- [x]` | Done (GFM) |
 
+Tested with Docusaurus 3.10, React 19, and Node.js 22.
+
 ## Install
 
 ```bash
