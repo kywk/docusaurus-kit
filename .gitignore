@@ -1,0 +1,18 @@
+node_modules/
+lib/
+build/
+.docusaurus/
+.cache/
+test-results/
+playwright-report/
+blob-report/
+*.tsbuildinfo
+.DS_Store
+npm-debug.log*
+pnpm-debug.log*
+.env
+.env.*
+!.env.example
+
+# local tarballs used for dogfooding
+.pack/

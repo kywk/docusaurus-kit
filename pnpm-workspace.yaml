@@ -1,0 +1,13 @@
+packages:
+  - "packages/*"
+  - "examples/*"
+
+# pnpm 12 supply-chain policy: give new releases 24 hours before resolving them.
+# Pele is exempt so upstream fixes can be adopted immediately.
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - pele
+
+allowBuilds:
+  core-js: true
+  esbuild: true

@@ -1,0 +1,15 @@
+:root {
+  --ifm-color-primary: #e67e22;
+  --ifm-color-primary-dark: #d35400;
+  --ifm-color-primary-darker: #ba4a00;
+  --ifm-color-primary-darkest: #873600;
+  --ifm-color-primary-light: #f39c12;
+  --ifm-color-primary-lighter: #f5b041;
+  --ifm-color-primary-lightest: #fad7a0;
+  --ifm-font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+}
+
+[data-theme="dark"] {
+  --ifm-background-color: #1a1512;
+  --ifm-color-primary: #f5b041;
+}

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"],
+    "baseUrl": ".",
+    "paths": {
+      "docusaurus-theme-pele": ["../../packages/theme-pele/src/index.ts"]
+    }
+  },
+  "include": ["docusaurus.config.ts", "sidebars.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["build", ".docusaurus", "node_modules"]
+}

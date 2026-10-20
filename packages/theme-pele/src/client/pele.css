@@ -1,0 +1,55 @@
+/**
+ * Docusaurus integration for Pele diagrams.
+ *
+ * Pele reads these CSS variables at paint time, so switching between light and
+ * dark mode never re-renders a diagram. Values fall back to Pele's own defaults
+ * when the site does not use the classic theme.
+ */
+.docusaurus-mermaid-container {
+  --pele-bg: var(--ifm-background-surface-color, #fff);
+  --pele-fg: var(--ifm-font-color-base, #1f1f1f);
+  --pele-muted: var(--ifm-color-emphasis-600, #6e6e6e);
+  --pele-line: var(--ifm-color-emphasis-800, #1f1f1f);
+  --pele-surface: var(--ifm-color-emphasis-100, #f3f3f3);
+  --pele-surface-alt: var(--ifm-color-emphasis-200, #e6e6e6);
+  --pele-border: var(--ifm-color-emphasis-300, #8a8a8a);
+  --pele-accent: var(--ifm-color-primary-darker, #5b7bd5);
+  --pele-critical: var(--ifm-color-danger, #e45756);
+  --pele-font: var(--ifm-font-family-base, sans-serif);
+  --pele-font-mono: var(--ifm-font-family-monospace, monospace);
+  --pele-radius: var(--ifm-global-radius, 4px);
+
+  max-width: 100%;
+  margin: 0 0 var(--ifm-leading, 1rem);
+  position: relative;
+}
+
+/*
+ * Pele floats zoom controls in the top-right corner. Reserve a gutter for them
+ * only when they are actually rendered, so a scaled diagram is never covered.
+ */
+.docusaurus-mermaid-container:has(.pele-zoom) {
+  padding-right: 2.75rem;
+}
+
+@media (max-width: 576px) {
+  .docusaurus-mermaid-container:has(.pele-zoom) {
+    padding-right: 0;
+  }
+
+  .docusaurus-mermaid-container .pele-zoom {
+    /* Pele sets display:flex inline on its zoom controls. */
+    /* biome-ignore lint/complexity/noImportantStyles: inline style from pele */
+    display: none !important;
+  }
+}
+
+.docusaurus-mermaid-container > svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+[data-theme="dark"] .docusaurus-mermaid-container {
+  --pele-accent: var(--ifm-color-primary, #5b7bd5);
+}

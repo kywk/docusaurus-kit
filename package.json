@@ -1,0 +1,29 @@
+{
+  "name": "docusaurus-plugins-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@12.4.1",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "build": "pnpm --filter './packages/*' run build",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm --filter './packages/*' run test",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish",
+    "playground": "pnpm --filter playground run start",
+    "playground:build": "pnpm build && pnpm --filter playground run build",
+    "test:e2e": "playwright test",
+    "check:ci": "pnpm check && pnpm typecheck && pnpm test && pnpm playground:build && pnpm test:e2e"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.7",
+    "@changesets/cli": "^2.29.7",
+    "@playwright/test": "^1.64.1",
+    "typescript": "^5.9.3"
+  }
+}

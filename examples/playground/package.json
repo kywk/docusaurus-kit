@@ -1,0 +1,30 @@
+{
+  "name": "playground",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "prestart": "pnpm --filter docusaurus-theme-pele run build",
+    "start": "docusaurus start --port 3100",
+    "prebuild": "pnpm --filter docusaurus-theme-pele run build",
+    "build": "docusaurus build",
+    "typecheck": "tsc --noEmit",
+    "serve": "docusaurus serve --port 3100 --no-open",
+    "clear": "docusaurus clear"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.10.2",
+    "@docusaurus/preset-classic": "^3.10.2",
+    "docusaurus-theme-pele": "workspace:*",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "^3.10.2",
+    "@docusaurus/plugin-content-docs": "^3.10.2",
+    "@docusaurus/theme-classic": "^3.10.2",
+    "@docusaurus/types": "^3.10.2",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "typescript": "^5.9.3"
+  }
+}
