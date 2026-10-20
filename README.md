@@ -10,9 +10,9 @@ never share a release cadence or a history.
 
 | Package | Status | Description |
 | --- | --- | --- |
-| [`docusaurus-theme-pele`](packages/theme-pele) | initial release (`0.1.0`) | Render Mermaid fences with [Pele](https://pele.run) instead of Mermaid |
-| `remark-obsidian-kanban` | planned | Render Obsidian kanban boards in Docusaurus |
-| `rehype-obsidian-tasks` | planned | Render Obsidian task syntax |
+| [`docusaurus-theme-pele`](packages/theme-pele) | `0.1.1` | Render Mermaid fences with [Pele](https://pele.run) instead of Mermaid |
+| [`remark-obsidian-kanban`](packages/remark-obsidian-kanban) | `0.2.0` | Render Obsidian kanban boards in Docusaurus |
+| [`rehype-obsidian-tasks`](packages/rehype-obsidian-tasks) | `0.2.0` | Render Obsidian `[-]` / `[/]` task statuses |
 
 Only packages that work outside kywk.me belong here. Site-specific policies
 (URL slugs, story maps, album import pipelines) stay in the site repository

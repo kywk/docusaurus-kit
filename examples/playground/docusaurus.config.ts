@@ -1,5 +1,7 @@
 import type { Config } from '@docusaurus/types';
 import type { PeleThemeConfig } from 'docusaurus-theme-pele';
+import { rehypeObsidianTasks } from 'rehype-obsidian-tasks';
+import { remarkKanban } from 'remark-obsidian-kanban';
 
 const config: Config = {
   title: 'docusaurus-theme-pele',
@@ -10,6 +12,7 @@ const config: Config = {
   onBrokenLinks: 'throw',
 
   markdown: {
+    format: 'detect',
     mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'warn',
@@ -24,6 +27,16 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          remarkPlugins: [
+            [
+              remarkKanban,
+              {
+                pageResolver: (name: string) => [name.replaceAll(' ', '-').toLowerCase()],
+                hrefTemplate: (permalink: string) => `/docs/${permalink}`,
+              },
+            ],
+          ],
+          rehypePlugins: [rehypeObsidianTasks],
         },
         blog: false,
         theme: {

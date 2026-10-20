@@ -1,0 +1,55 @@
+{
+  "name": "rehype-obsidian-tasks",
+  "version": "0.2.0",
+  "description": "Render Obsidian task statuses such as [-] and [/] in remark/rehype pipelines and Docusaurus.",
+  "license": "MIT",
+  "author": "kywk",
+  "keywords": [
+    "rehype",
+    "obsidian",
+    "tasks",
+    "checkbox",
+    "docusaurus"
+  ],
+  "main": "src/index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "unified": "^11.0.5",
+    "vitest": "^2.1.9"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kywk/docusaurus-kit.git",
+    "directory": "packages/rehype-obsidian-tasks"
+  },
+  "bugs": {
+    "url": "https://github.com/kywk/docusaurus-kit/issues"
+  },
+  "homepage": "https://github.com/kywk/docusaurus-kit/tree/main/packages/rehype-obsidian-tasks#readme"
+}

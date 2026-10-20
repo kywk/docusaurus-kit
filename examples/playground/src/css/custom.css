@@ -13,3 +13,16 @@
   --ifm-background-color: #1a1512;
   --ifm-color-primary: #f5b041;
 }
+
+.task-list-item--cancelled {
+  color: var(--ifm-color-emphasis-500);
+  text-decoration: line-through;
+}
+
+.task-list-item--in-progress {
+  color: var(--ifm-color-primary);
+}
+
+.task-list-item--in-progress .task-list-item-checkbox--in-progress {
+  accent-color: var(--ifm-color-primary);
+}
