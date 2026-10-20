@@ -1,5 +1,11 @@
 # rehype-obsidian-tasks
 
+## 0.2.1
+
+### Patch Changes
+
+- c8ae624: Document the tested Docusaurus, React, and Node.js versions.
+
 ## 0.2.0
 
 ### Minor Changes

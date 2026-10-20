@@ -1,6 +1,6 @@
 {
   "name": "rehype-obsidian-tasks",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Render Obsidian task statuses such as [-] and [/] in remark/rehype pipelines and Docusaurus.",
   "license": "MIT",
   "author": "kywk",
