@@ -20,8 +20,8 @@ will not look identical to Mermaid's output.
 
 | Dependency | Version |
 | --- | --- |
-| Docusaurus | 3.8 or newer |
-| React | 18 or 19 |
+| Docusaurus | 3.8 or newer (tested with 3.10) |
+| React | 18 or 19 (tested with 19.2) |
 | Node.js | 20.19 or newer |
 | Pele | 1.7 (installed as a dependency) |
 
