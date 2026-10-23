@@ -1,5 +1,11 @@
 # rehype-obsidian-tasks
 
+## 0.2.2
+
+### Patch Changes
+
+- 64c70d0: Optimize AST traversal in `remark-obsidian-kanban` and `rehype-obsidian-tasks`, move repeated kanban card inline styles into the board stylesheet, and allow `docusaurus-theme-pele` to retry loading the renderer chunk after a transient network error.
+
 ## 0.2.1
 
 ### Patch Changes
