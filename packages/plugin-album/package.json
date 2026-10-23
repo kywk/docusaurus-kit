@@ -1,6 +1,6 @@
 {
   "name": "docusaurus-plugin-album",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Pinterest-style masonry photo album plugin for Docusaurus with a Google Photos timeline scrubber and zero-dependency lightbox.",
   "license": "MIT",
   "author": "kywk",
