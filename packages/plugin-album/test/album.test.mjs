@@ -139,17 +139,18 @@ describe('docusaurus-plugin-album', () => {
     const themePath = instance.getThemePath();
     const tsThemePath = instance.getTypeScriptThemePath();
 
-    for (const file of [
-      'AlbumListPage.tsx',
-      'AlbumPostPage.tsx',
-      'AlbumHeroHeader.tsx',
-      'AlbumMasonryGrid.tsx',
-      'TimelineScrubber.tsx',
-      'ImageLightbox.tsx',
-      'styles.module.css',
+    for (const name of [
+      'AlbumListPage',
+      'AlbumPostPage',
+      'AlbumHeroHeader',
+      'AlbumMasonryGrid',
+      'TimelineScrubber',
+      'ImageLightbox',
     ]) {
-      expect(fs.existsSync(path.join(themePath, file))).toBe(true);
-      expect(fs.existsSync(path.join(tsThemePath, file))).toBe(true);
+      expect(fs.existsSync(path.join(themePath, `${name}.js`))).toBe(true);
+      expect(fs.existsSync(path.join(tsThemePath, `${name}.tsx`))).toBe(true);
     }
+    expect(fs.existsSync(path.join(themePath, 'styles.module.css'))).toBe(true);
+    expect(fs.existsSync(path.join(tsThemePath, 'styles.module.css'))).toBe(true);
   });
 });
