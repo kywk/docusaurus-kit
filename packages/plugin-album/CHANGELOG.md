@@ -1,5 +1,11 @@
 # docusaurus-plugin-album
 
+## 0.1.1
+
+### Patch Changes
+
+- 0c379ac: Compile theme components in `lib/theme` to JavaScript (`.js` + `.d.ts`) so consumer bundlers do not need a TypeScript loader for `node_modules/docusaurus-plugin-album`, while keeping `src/theme/*.tsx` for `getTypeScriptThemePath()`.
+
 ## 0.1.0
 
 ### Minor Changes
