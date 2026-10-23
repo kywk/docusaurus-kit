@@ -11,6 +11,7 @@ never share a release cadence or a history.
 | Package | Status | Description |
 | --- | --- | --- |
 | [`docusaurus-theme-pele`](packages/theme-pele) | `0.1.1` | Render Mermaid fences with [Pele](https://pele.run) instead of Mermaid |
+| [`docusaurus-plugin-album`](packages/plugin-album) | `0.1.0` | Pinterest-style masonry photo album with timeline scrubber and lightbox |
 | [`remark-obsidian-kanban`](packages/remark-obsidian-kanban) | `0.2.1` | Render Obsidian kanban boards in Docusaurus |
 | [`rehype-obsidian-tasks`](packages/rehype-obsidian-tasks) | `0.2.1` | Render Obsidian `[-]` / `[/]` task statuses |
 

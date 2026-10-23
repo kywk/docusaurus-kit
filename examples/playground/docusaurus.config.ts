@@ -1,4 +1,5 @@
 import type { Config } from '@docusaurus/types';
+import type { AlbumPluginOptions } from 'docusaurus-plugin-album';
 import type { PeleThemeConfig } from 'docusaurus-theme-pele';
 import { rehypeObsidianTasks } from 'rehype-obsidian-tasks';
 import { remarkKanban } from 'remark-obsidian-kanban';
@@ -20,6 +21,17 @@ const config: Config = {
   },
 
   themes: ['docusaurus-theme-pele'],
+
+  plugins: [
+    [
+      'docusaurus-plugin-album',
+      {
+        id: 'album',
+        path: 'blog.album',
+        routeBasePath: 'album',
+      } satisfies AlbumPluginOptions,
+    ],
+  ],
 
   presets: [
     [
@@ -52,7 +64,10 @@ const config: Config = {
     } satisfies PeleThemeConfig,
     navbar: {
       title: 'theme-pele',
-      items: [{ to: '/docs', label: 'Diagrams', position: 'left' }],
+      items: [
+        { to: '/docs', label: 'Diagrams', position: 'left' },
+        { to: '/album', label: 'Album', position: 'left' },
+      ],
     },
     footer: {
       style: 'dark',

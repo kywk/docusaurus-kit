@@ -48,3 +48,35 @@ test('restyles diagrams when the color mode changes', async ({ page }) => {
   expect(dark).not.toBe(light);
   await expect(page.locator('svg.pele').first()).toBeVisible();
 });
+
+test('renders album masonry grid and opens photo lightbox on post page', async ({ page }) => {
+  const pageErrors: string[] = [];
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+
+  await page.goto('/album');
+
+  const cards = page.locator('[data-album-card="true"]');
+  await expect(cards).toHaveCount(2);
+  await expect(cards.first()).toHaveAttribute('data-year', '2025');
+
+  // Navigate to the first album post
+  await cards.first().click();
+  await expect(page).toHaveURL(/\/album\/2025\/09\/05\/hokkaido-biei/);
+
+  // Markdown body image should have build-time lazy loading and lightbox index
+  const bodyImg = page.locator('.album-post-article img[data-lightbox-index="1"]');
+  await expect(bodyImg).toHaveAttribute('loading', 'lazy');
+  await expect(bodyImg).toHaveAttribute('decoding', 'async');
+
+  // Clicking the image opens the lightbox
+  await bodyImg.click();
+  const dialog = page.getByRole('dialog', { name: '相片檢視燈箱' });
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toContainText('2 / 2');
+
+  // Escape closes the lightbox
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+
+  expect(pageErrors).toEqual([]);
+});

@@ -1,0 +1,77 @@
+{
+  "name": "docusaurus-plugin-album",
+  "version": "0.0.0",
+  "description": "Pinterest-style masonry photo album plugin for Docusaurus with a Google Photos timeline scrubber and zero-dependency lightbox.",
+  "license": "MIT",
+  "author": "kywk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kywk/docusaurus-kit.git",
+    "directory": "packages/plugin-album"
+  },
+  "bugs": {
+    "url": "https://github.com/kywk/docusaurus-kit/issues"
+  },
+  "homepage": "https://github.com/kywk/docusaurus-kit/tree/main/packages/plugin-album#readme",
+  "keywords": [
+    "docusaurus",
+    "docusaurus-plugin",
+    "album",
+    "gallery",
+    "pinterest",
+    "masonry",
+    "photo",
+    "lightbox"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src/theme",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/copy-assets.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run",
+    "prepack": "pnpm run build"
+  },
+  "peerDependencies": {
+    "@docusaurus/core": "^3.8.0",
+    "@docusaurus/plugin-content-blog": "^3.8.0",
+    "@docusaurus/theme-common": "^3.8.0",
+    "clsx": "^2.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@docusaurus/core": "^3.10.2",
+    "@docusaurus/module-type-aliases": "^3.10.2",
+    "@docusaurus/plugin-content-blog": "^3.10.2",
+    "@docusaurus/theme-classic": "^3.10.2",
+    "@docusaurus/theme-common": "^3.10.2",
+    "@docusaurus/types": "^3.10.2",
+    "@types/node": "^22.19.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "clsx": "^2.1.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

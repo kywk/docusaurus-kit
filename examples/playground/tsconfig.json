@@ -11,6 +11,7 @@
     "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"],
     "baseUrl": ".",
     "paths": {
+      "docusaurus-plugin-album": ["../../packages/plugin-album/src/index.ts"],
       "docusaurus-theme-pele": ["../../packages/theme-pele/src/index.ts"]
     }
   },
