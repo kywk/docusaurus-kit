@@ -45,13 +45,9 @@ function remarkKanban(options = {}) {
       }
     };
 
-    let isKanbanBoard = false;
-
-    visit(tree, 'yaml', (node) => {
-      if (node.value?.includes('kanban-plugin: board')) {
-        isKanbanBoard = true;
-      }
-    });
+    const isKanbanBoard = tree.children?.some(
+      (node) => node.type === 'yaml' && node.value?.includes('kanban-plugin: board'),
+    );
 
     if (!isKanbanBoard) return;
 
@@ -60,23 +56,20 @@ function remarkKanban(options = {}) {
     const filteredChildren = [];
 
     tree.children.forEach((node) => {
-      let shouldSkip = false;
+      if (node.type !== 'heading' && node.type !== 'list') {
+        let nodeText = node.value || '';
+        visit(node, 'text', (textNode) => {
+          nodeText += textNode.value;
+        });
 
-      let nodeText = '';
-      if (node.value) nodeText += node.value;
-      visit(node, 'text', (textNode) => {
-        nodeText += textNode.value;
-      });
-
-      if (
-        nodeText.includes('kanban:settings') ||
-        (nodeText.includes('%%') && nodeText.includes('kanban')) ||
-        (nodeText.includes('```') && nodeText.includes('kanban-plugin'))
-      ) {
-        shouldSkip = true;
+        if (
+          nodeText.includes('kanban:settings') ||
+          (nodeText.includes('%%') && nodeText.includes('kanban')) ||
+          (nodeText.includes('```') && nodeText.includes('kanban-plugin'))
+        ) {
+          return;
+        }
       }
-
-      if (shouldSkip) return;
 
       filteredChildren.push(node);
 
@@ -184,8 +177,8 @@ function remarkKanban(options = {}) {
                   : ' kanban-card--open'
             : '';
           const taskAttribute = card.task ? ` data-task="${card.task}"` : '';
-          html += `<div class="kanban-card${statusClass}"${taskAttribute} style="background: var(--ifm-card-background-color); border: 1px solid var(--ifm-color-emphasis-200); border-radius: 6px; padding: 0.75rem; margin-bottom: 0.75rem; color: var(--ifm-color-content); box-shadow: 0 1px 3px rgba(0,0,0,0.1);">`;
-          html += `<div class="kanban-card-title" style="font-weight: 500; margin-bottom: 0.5rem;">${card.title}</div>`;
+          html += `<div class="kanban-card${statusClass}"${taskAttribute}>`;
+          html += `<div class="kanban-card-title">${card.title}</div>`;
 
           if (card.content && card.content.length > 0) {
             card.content.forEach((contentNode) => {
@@ -246,7 +239,8 @@ function remarkKanban(options = {}) {
    用 CSS 隱藏會留下指向看板欄位（無 heading id）的 TOC 連結，造成 broken anchors。 */
 .kanban-board-container { background: var(--ifm-background-color); padding: 1rem; border-radius: 8px; }
 .kanban-board-container img { max-width: 100%; height: auto; border-radius: 4px; }
-.kanban-card-title { color: var(--ifm-color-primary-dark); }
+.kanban-card { background: var(--ifm-card-background-color); border: 1px solid var(--ifm-color-emphasis-200); border-radius: 6px; padding: 0.75rem; margin-bottom: 0.75rem; color: var(--ifm-color-content); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.kanban-card-title { color: var(--ifm-color-primary-dark); font-weight: 500; margin-bottom: 0.5rem; }
 .kanban-tag { display: inline-block; margin: 0 0.1em; padding: 0 0.6em; border-radius: 999px; font-size: 0.85em; font-weight: 500; line-height: 1.6; color: hsl(var(--kanban-tag-hue) 65% 32%); background: hsl(var(--kanban-tag-hue) 70% 50% / 0.15); border: 1px solid hsl(var(--kanban-tag-hue) 70% 50% / 0.35); }
 [data-theme='dark'] .kanban-tag { color: hsl(var(--kanban-tag-hue) 75% 72%); }
 .kanban-card--cancelled .kanban-card-title { color: var(--ifm-color-emphasis-500); text-decoration: line-through; }

@@ -9,7 +9,10 @@ import React from 'react';
 let pelePromise;
 
 function loadPele() {
-  pelePromise ??= import('pele');
+  pelePromise ??= import('pele').catch((error) => {
+    pelePromise = undefined;
+    throw error;
+  });
   return pelePromise;
 }
 

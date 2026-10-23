@@ -48,4 +48,25 @@ describe('rehype-obsidian-tasks', () => {
 
     expect(html).not.toContain('task-list-item');
   });
+
+  it('skips non-list subtrees like code and svg elements', () => {
+    let visitedCodeChildren = false;
+    const tree = {
+      type: 'root',
+      children: [
+        {
+          type: 'element',
+          tagName: 'pre',
+          properties: {},
+          get children() {
+            visitedCodeChildren = true;
+            return [];
+          },
+        },
+      ],
+    };
+
+    rehypeObsidianTasks()(tree);
+    expect(visitedCodeChildren).toBe(false);
+  });
 });

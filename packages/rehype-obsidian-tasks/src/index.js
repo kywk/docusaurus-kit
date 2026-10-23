@@ -7,10 +7,14 @@
  *   - [/] : In progress task
  */
 
+const TASK_RE = /^\[([-/])\](?:\s+(.*)|\s*$)/;
+const SKIP_TAGS = new Set(['pre', 'code', 'svg', 'script', 'style']);
+
 function rehypeObsidianTasks(_options = {}) {
   return (tree) => {
     function processNode(node) {
-      if (!node?.children) return;
+      if (!node || (node.type === 'element' && SKIP_TAGS.has(node.tagName))) return;
+      if (!node.children) return;
 
       for (const child of node.children) {
         processNode(child);
@@ -52,7 +56,7 @@ function rehypeObsidianTasks(_options = {}) {
           if (container && container.length > 0) {
             const firstChild = container[0];
             if (firstChild && firstChild.type === 'text') {
-              const match = firstChild.value.match(/^\[([-/])\](?:\s+(.*)|\s*$)/);
+              const match = firstChild.value.match(TASK_RE);
               if (match) {
                 hasTask = true;
                 const symbol = match[1];

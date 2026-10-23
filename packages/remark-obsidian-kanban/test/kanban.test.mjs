@@ -80,11 +80,28 @@ kanban-plugin: board
     expect(html).toContain('Some Note');
   });
 
-  it('leaves non-kanban documents untouched', () => {
+  it('leaves non-kanban documents untouched without traversing deep nodes', () => {
     const markdown = '# Normal note\n\n- [ ] A task\n';
     const tree = run(markdown, { pageResolver, hrefTemplate });
 
     expect(tree.children.some((node) => node.type === 'html')).toBe(false);
+
+    let visitedDeepChildren = false;
+    const customTree = {
+      type: 'root',
+      children: [
+        { type: 'yaml', value: 'title: Normal page' },
+        {
+          type: 'paragraph',
+          get children() {
+            visitedDeepChildren = true;
+            return [{ type: 'text', value: 'Hello' }];
+          },
+        },
+      ],
+    };
+    remarkKanban()(customTree);
+    expect(visitedDeepChildren).toBe(false);
   });
 
   it('drops kanban settings blocks', () => {

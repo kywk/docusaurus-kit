@@ -20,7 +20,7 @@
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish",
     "playground": "pnpm --filter playground run start",
-    "playground:build": "pnpm build && pnpm --filter playground run build",
+    "playground:build": "pnpm --filter playground run build",
     "test:e2e": "playwright test",
     "check:ci": "pnpm check && pnpm typecheck && pnpm test && pnpm playground:build && pnpm test:e2e"
   },
